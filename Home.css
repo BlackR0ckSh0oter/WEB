@@ -1,0 +1,223 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('fan.jpg') no-repeat center center fixed; /* Зафиксируем изображение по центру */
+    background-size: cover; /* Заполним всю доступную область */
+}
+
+#registration-form-container {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center; /* добавлено */
+    padding-top: 50px; /* добавлено */
+}
+
+#registration-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    width: 400px;
+    margin: 0 auto;
+}
+
+#registration-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#registration-form input[type="text"],
+#registration-form input[type="password"],
+#registration-form textarea,
+#registration-form select,
+#registration-form button {
+    width: 100%; /* изменено */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #16537e;
+    border-radius: 5px;
+    box-sizing: border-box; /* добавлено */
+}
+
+#registration-form button {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+fieldset {
+    font-size: 20px;
+    text-align: left;
+    padding: 4;
+    margin: 0;
+    border: none;
+}
+.features-t { /* Стиль для заголовка "Регистрация" */
+    color: #000000; /* Белый цвет текста */
+    margin-bottom: 20px; /* Добавлен отступ снизу, чтобы разделить заголовок и форму */
+    font-size: 50px;
+    text-align: center; /* Выравнивание текста по центру */
+}
+/* Стили для данных пользователя */
+.user-info {
+    color: #000000; /* Цвет текста заголовка */
+    font-size: 24px;
+}
+
+.error-message {
+    color: #ffffff; /* Белый цвет текста */
+    text-align: center; /* Выравнивание текста по центру */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+/* Навигационное меню */
+.navbar {
+    color: #fff;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    float: left;
+}
+
+.nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 7px;
+    font-size: 25px;
+    white-space: nowrap; /* Предотвращаем перенос слов */
+}
+
+.nav {
+    display: flex; /* Используем flexbox */
+    flex-direction: column; /* Располагаем элементы в столбец */
+    justify-content: flex-end; /* Выравниваем элементы по правому краю */
+    align-items: flex-end; /* Размещаем элементы в конце строки */
+}
+
+.nav-row {
+    display: flex;
+    flex-direction: column; /* Располагаем элементы в столбец */
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    align-items: flex-end; /* Размещаем элементы в конце строки */
+}
+
+.nav-row a {
+    margin-left: 7px;
+    font-size: 25px;
+    white-space: nowrap; /* Предотвращаем перенос слов */
+}
+
+
+
+
+/* Заголовок */
+.jumbotron {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.jumbotron h1 {
+    font-size: 36px;
+    color: #ffffff;
+}
+
+.jumbotron p {
+    font-size: 18px;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+/* Блог */
+/* Общий стиль блога */
+.blog {
+    padding: 80px 0;
+}
+
+/* Заголовок блога */
+.blog h2 {
+    text-align: center;
+    font-size: 50px; /* Увеличили размер шрифта */
+    margin-bottom: 60px; /* Увеличили отступ снизу */
+    color: #ffffff; /* Цвет текста */
+}
+
+/* Контейнер для постов блога */
+.blog-posts {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Изменили выравнивание по вертикали */
+    flex-wrap: wrap;
+}
+
+/* Карточка поста блога */
+.blog-post {
+    margin: 20px;
+    max-width: 400px;
+    background-color: #fff; /* Цвет фона */
+    border-radius: 8px; /* Закруглили углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Добавили тень */
+
+}
+
+/* Видео внутри поста блога */
+.blog-post iframe {
+    width: 100%; /* Сделали видео растягивающимся на всю ширину карточки */
+    height: 250px; /* Уменьшили высоту видео */
+    border: none; /* Убрали границу */
+}
+
+/* Информация о посте блога */
+.blog-post-info {
+    padding: 20px;
+}
+
+/* Заголовок поста блога */
+.blog-post-info h3 {
+    font-size: 20px; /* Уменьшили размер заголовка */
+    margin-bottom: 10px;
+    color: #333; /* Цвет текста */
+}
+
+/* Текст поста блога */
+.blog-post-info p {
+    font-size: 16px;
+    color: #666; /* Цвет текста */
+}
+
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer span {
+    font-size: 14px;
+}
+
+/* Респонсивные стили */
+@media screen and (max-width: 768px) {
+    .nav {
+        float: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .nav a {
+        display: block;
+        margin: 10px 0;
+    }
+    
+    .jumbotron h1 {
+        font-size: 28px;
+    }
+    
+    .jumbotron p {
+        font-size: 16px;
+    }
+}
