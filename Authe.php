@@ -46,26 +46,31 @@ if (isset($_SESSION['user'])) {
     <link rel="icon" href="logo1.png">
 </head>
 <body>
-    <!-- navbar -->
-    <header class="navbar">
+<header class="navbar">
     <div class="container">
         <div class="navbar-brand">
-            <a href="#"><img src="logo1.png" alt="Логотип"></a>
+        <a href="Main.php"><img src="logo1.png" alt="Логотип"></a>
         </div>
         <nav class="nav">
             <div class="nav-row">
-                <a href="gallery.php">Галерея</a>
-                <a href="Home.php">Турбазы</a>
+                <a href="Gallery.php" class="btn">Галерея</a>
+                <a href="Home.php" class="btn">Контакты</a>
                 <?php if($flag == 1): ?>
-                    <a href="Profile.php" class="btn"><?= $_SESSION['user']['full_name'] ?></a>
+                    <a href="Profile.php" class="btn">Личный кабинет</a>
+                    <a href="Letter.php" class="btn">Задать вопрос</a>
                 <?php else: ?>
                     <a href="Authe.php" class="btn">Войти</a>
                     <a href="Regist.php" class="btn">Регистрация</a>
                 <?php endif; ?>
             </div>
+            <div class="nav-row">
+                <?php if($flag == 1): ?>
+                    <a href="Logout.php" class="btn">Выход</a>
+                <?php endif; ?>
+            </div>
         </nav>
     </div>
-    </header>
+</header>   
     <!-- navbar end -->     
 
     <!-- jumbotron -->

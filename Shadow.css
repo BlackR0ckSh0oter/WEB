@@ -15,17 +15,12 @@ body {
 
 /* Навигационное меню */
 .navbar {
-    color: #fff;
+    color: #000000;
     padding: 10px 0;
 }
 
 .navbar-brand {
     float: left;
-}
-
-.nav {
-    display: flex; /* Используем flexbox */
-    justify-content: flex-end; /* Выравниваем элементы по правому краю */
 }
 
 .nav a {
@@ -36,17 +31,27 @@ body {
     white-space: nowrap; /* Предотвращаем перенос слов */
 }
 
-.nav-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-    justify-content: flex-end; /* Элементы внутри .nav-row также выравниваются по правому краю */
+.nav {
+    display: flex; /* Используем flexbox */
+    flex-direction: column; /* Располагаем элементы в столбец */
+    justify-content: flex-end; /* Выравниваем элементы по правому краю */
+    align-items: flex-end; /* Размещаем элементы в конце строки */
 }
 
-.nav-row a {
-    flex-basis: calc(33.33% - 20px);
+/* Добавляем стили для кнопок */
+.btn {
+    background-color: #1c1c1cd2; /* Цвет фона */
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
 }
-
 
 /* Стили для ячеек таблицы */
 td {

@@ -23,26 +23,31 @@ include 'Connect.php';
 
 </head>
 <body>
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <a href="#"><img src="logo1.png" alt="Логотип"></a>
-            </div>
-            <nav class="nav">
-                <a href="gallery.php">Галерея</a>
-                <a href="Home.php">Турбазы</a>
+<header class="navbar">
+    <div class="container">
+        <div class="navbar-brand">
+        <a href="Main.php"><img src="logo1.png" alt="Логотип"></a>
+        </div>
+        <nav class="nav">
+            <div class="nav-row">
+                <a href="Gallery.php" class="btn">Галерея</a>
+                <a href="Home.php" class="btn">Контакты</a>
                 <?php if($flag == 1): ?>
                     <a href="Profile.php" class="btn">Личный кабинет</a>
                     <a href="Letter.php" class="btn">Задать вопрос</a>
-                    <a href="Logout.php" class="btn">Выход</a>
                 <?php else: ?>
-                    <a href="Auth.php" class="btn">Войти</a>
-                    <a href="Reg.php" class="btn">Регистрация</a>
+                    <a href="Authe.php" class="btn">Войти</a>
+                    <a href="Regist.php" class="btn">Регистрация</a>
                 <?php endif; ?>
-            </nav>
-        </div>
-    </header>	
+            </div>
+            <div class="nav-row">
+                <?php if($flag == 1): ?>
+                    <a href="Logout.php" class="btn">Выход</a>
+                <?php endif; ?>
+            </div>
+        </nav>
+    </div>
+</header>   
 
 		<!-- jumbotron -->
 	<div class="container">

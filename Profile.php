@@ -20,16 +20,15 @@ include 'Connect.php';
 </head>
 <body>
         <!-- navbar -->
-        <header class="navbar">
+<header class="navbar">
     <div class="container">
         <div class="navbar-brand">
-            <a href="#"><img src="logo1.png" alt="Логотип"></a>
+        <a href="Main.php"><img src="logo1.png" alt="Логотип"></a>
         </div>
         <nav class="nav">
             <div class="nav-row">
-                <a href="gallery.php">Галерея</a>
-                <a href="Home.php">Турбазы</a>
-                <a href="Box.php">Услуги</a>
+                <a href="Gallery.php" class="btn">Галерея</a>
+                <a href="Home.php" class="btn">Контакты</a>
                 <?php if($flag == 1): ?>
                     <a href="Profile.php" class="btn">Личный кабинет</a>
                     <a href="Letter.php" class="btn">Задать вопрос</a>
@@ -45,7 +44,7 @@ include 'Connect.php';
             </div>
         </nav>
     </div>
-</header>
+</header>   
         <!-- navbar end -->     
 
     <br> <br> <br> <br> <br> 
@@ -114,8 +113,6 @@ if($DELbacket > 0){
     </table>
     </div>
     </div>
-    </div>
-    </div>
-    </div>
+
 </body>
 </html>
