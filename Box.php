@@ -46,7 +46,7 @@ if (isset($_SESSION['user'])) {
 <!-- jumbotron -->
 <div class="table">
 	<div class="txt">
-            <h1 class="features-t">Выбор доступных сервисных услуг</h1>
+            <h1 class="features-t">Выбор доступных услуг</h1>
 
             <table align="center">
                 <tr>
@@ -58,14 +58,14 @@ if (isset($_SESSION['user'])) {
                 </tr>
                 <form method="POST">
                 <?php 
-                $prod1 = mysqli_query($dp, "SELECT * FROM сервисные_услуги"); 
+                $prod1 = mysqli_query($dp, "SELECT * FROM услуги"); 
                 while($prod = mysqli_fetch_array($prod1)) {
                     echo '<tr>';
-                    echo '<td>'.$prod[2].'</td><td>'.$prod[3].'</td>';
+                    echo '<td>'.$prod[1].'</td><td>'.$prod[2].'</td>';
                     if($flag == 1) { 
                 ?>
                     <td>
-                        <input value="<?= $prod['Код_услуги'] ?>" name="ArrCart[]" type="checkbox">
+                        <input value="<?= $prod['ID услуги'] ?>" name="ArrCart[]" type="checkbox">
                     </td>
                 <?php
                     }
@@ -85,7 +85,7 @@ if (isset($_SESSION['user'])) {
                 $date_added = date('Y-m-d H:i:s'); // Используем корректный формат даты
 
                 foreach($_POST["ArrCart"] as $prod) {
-                    mysqli_query($dp, "INSERT INTO `покупка` (`ID корзины`, `ID услуги`, `Пользователь`, `Дата добавления в корзину услуги`) 
+                    mysqli_query($dp, "INSERT INTO `корзина` (`ID корзины`, `ID услуги`, `Пользователь`, `Дата добавления в корзину услуги`) 
                                       VALUES (NULL, '$prod', '$user', '$date_added')");
                 }
                 echo "Работы добавлены в корзину!";

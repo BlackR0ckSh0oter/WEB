@@ -32,6 +32,7 @@ include 'Connect.php';
                 <?php if($flag == 1): ?>
                     <a href="Profile.php" class="btn">Личный кабинет</a>
                     <a href="Letter.php" class="btn">Задать вопрос</a>
+                    <a href="Box.php" class="btn">Оформить заказ</a>
                 <?php else: ?>
                     <a href="Authe.php" class="btn">Войти</a>
                     <a href="Regist.php" class="btn">Регистрация</a>

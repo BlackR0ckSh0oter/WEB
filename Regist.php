@@ -24,32 +24,32 @@ function checklength($text, $min, $max){
 // Unset CAPTCHA session if page is reloaded
 if (!isset($_POST['C_C']) && !isset($_POST['REGISTR'])) {
     unset($_SESSION['CAPTCHA']);
-    }
-    
-    if(isset($_POST['C_C'])) {
+}
+
+if(isset($_POST['C_C'])) {
     // Protect against SQL injection using prepared statements
     $checkCAP = mysqli_prepare($dp, "SELECT * FROM `captcha` WHERE text_cap = ?");
     mysqli_stmt_bind_param($checkCAP, "s", $_POST['CHECK_CAPTCHA']);
     mysqli_stmt_execute($checkCAP);
     $outcheckCAP = mysqli_stmt_get_result($checkCAP);
     mysqli_stmt_close($checkCAP);
-    
+
     if(mysqli_num_rows($outcheckCAP) > 0) {
-    $_SESSION['CAPTCHA'] = 1;
-    $_SESSION['message'] = "Капча засчитана, продолжайте регистрацию!";
+        $_SESSION['CAPTCHA'] = 1;
+        $_SESSION['message'] = "Капча засчитана, продолжайте регистрацию!";
     } else {
-    $_SESSION['CAPTCHA'] = 0;
-    $_SESSION['message'] = "Введите капчу!";
+        $_SESSION['CAPTCHA'] = 0;
+        $_SESSION['message'] = "Введите капчу!";
     }
-    }
-    
-    if(isset($_POST['REGISTR']) && $_SESSION['CAPTCHA']) {
+}
+
+if(isset($_POST['REGISTR']) && $_SESSION['CAPTCHA']) {
     $full_name = convert($_POST['full_name']);
     $login = convert($_POST['login']);
     $number = convert($_POST['number']);
     $password = convert($_POST['password']);
     $password_confirm = convert($_POST['password_confirm']);
-    
+
     // Protect against SQL injection using prepared statements
     $CheckUserQuery = mysqli_prepare($dp, "SELECT * FROM клиенты WHERE `Логин` = ?");
     mysqli_stmt_bind_param($CheckUserQuery, "s", $login);
@@ -57,37 +57,38 @@ if (!isset($_POST['C_C']) && !isset($_POST['REGISTR'])) {
     $CheckUserResult = mysqli_stmt_get_result($CheckUserQuery);
     $CheckUser = mysqli_fetch_array($CheckUserResult);
     mysqli_stmt_close($CheckUserQuery);
-    
+
     if(empty($CheckUser)){
-    if(!checklength($login, 3, 8)) {
-    $_SESSION['message'] = "Длина логина должна быть от 3 до 8 символов!";
-    } elseif (!checklength($password, 4, 16)) {
-    $_SESSION['message'] = "Длина пароля должна быть от 4 до 16 символов!";
-    } elseif ($password !== $password_confirm) {
-    $_SESSION['message'] = 'Пароли не совпадают';
+        if(!checklength($login, 3, 8)) {
+            $_SESSION['message'] = "Длина логина должна быть от 3 до 8 символов!";
+        } elseif (!checklength($password, 4, 16)) {
+            $_SESSION['message'] = "Длина пароля должна быть от 4 до 16 символов!";
+        } elseif ($password !== $password_confirm) {
+            $_SESSION['message'] = 'Пароли не совпадают';
+        } else {
+            $date = date('Y-m-d');
+            // Protect against SQL injection using prepared statements
+            $insertUserQuery = mysqli_prepare($dp, "INSERT INTO `клиенты` (`Дата регистрации`, `ФИО`, `Номер телефона`, `Логин`, `Пароль`) VALUES (?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($insertUserQuery, "sssss", $date, $full_name, $number, $login, $password);
+            mysqli_stmt_execute($insertUserQuery);
+            mysqli_stmt_close($insertUserQuery);
+            header('Location: Authe.php');
+            exit();
+        }
     } else {
-    $date = date('Y-m-d');
-    // Protect against SQL injection using prepared statements
-    $insertUserQuery = mysqli_prepare($dp, "INSERT INTO `клиенты` (`Дата регистрации`, `ФИО`, `Номер телефона`, `Логин`, `Пароль`) VALUES (?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($insertUserQuery, "sssss", $date, $full_name, $number, $login, $password);
-    mysqli_stmt_execute($insertUserQuery);
-    mysqli_stmt_close($insertUserQuery);
-    header('Location: Authe.php');
-    exit();
+        $_SESSION['message'] = 'Аккаунт с данным логином уже существует в системе';
     }
-    } else {
-    $_SESSION['message'] = 'Аккаунт с данным логином уже существует в системе';
-    }
-    
+
     header('Location: Regist.php');
     exit();
-    }
-    
-    if ($_SESSION['user']) {
+}
+
+if ($_SESSION['user']) {
     header('Location: Profile.php');
     exit();
-    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -129,14 +130,11 @@ if (!isset($_POST['C_C']) && !isset($_POST['REGISTR'])) {
     <!-- Форма регистрации -->
     <form id="registration-form" action="Regist.php" method="post" enctype="multipart/form-data">
         <h1 class="features-t">Регистрация</h1>
-        
-        <?php if(empty($_SESSION['CAPTCHA'])): ?>
-            <h4 align="center">Перед регистрацией пройдите капчу</h4>
-            <div align="center"><img src='<?php echo $outCAPTCHA[1] ?>' width="150" height="80"/></div>
-            <label>Ввод капчи</label>
-            <input type="text" name="CHECK_CAPTCHA" placeholder="Введите текст с картинки">
-            <button type="submit" name="C_C">Проверить капчу</button>
-        <?php endif; ?>
+        <h4 align="center">Перед регистрацией пройдите капчу</h4>
+        <div align="center"><img src='<?php echo $outCAPTCHA[1] ?>' width="150" height="80"/></div>
+        <label>Ввод капчи</label>
+        <input type="text" name="CHECK_CAPTCHA" placeholder="Введите текст с картинки">
+        <button type="submit" name="C_C">Проверить капчу</button>
     </form>
 
     <form id="registration-form" action="Regist.php" method="post" enctype="multipart/form-data">
