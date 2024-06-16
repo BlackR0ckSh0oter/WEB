@@ -62,7 +62,7 @@ include 'Connect.php';
                 <td align="left">
                     <div>Логин: <?= $_SESSION['user']['login'] ?></div>
                     <div>Телефон: <?= $_SESSION['user']['number'] ?></div>
-                    <div>Дата вашей регистрации на сайте: <?= $_SESSION['user']['date'] ?></div>
+                    <div>Дата вашей регистрации на сайте: <?= date('d-m-Y', strtotime($_SESSION['user']['date'])) ?></div>
                 </td>
             </tr>
 
@@ -93,20 +93,20 @@ while($outserv = mysqli_fetch_array($SERV))
     $service_id = $outserv[1];
     $service_query = mysqli_query($dp, "SELECT `Тип услуги`, Цена FROM услуги WHERE `ID услуги` = $service_id");
     $service_data = mysqli_fetch_array($service_query);
-
+    $formatted_date = date('d-m-Y H:i:s', strtotime($outserv[3]));
     echo '<tr>
     <td>'. $service_data[0] . '</td>
     <td>'. $service_data[1] . '</td>
-    <td>' . $outserv[3] . '</td>
-    <td><a href="Profile.php?DELbacket=' . $outserv[2] . '">Удалить</a></td>
+    <td>' . $formatted_date . '</td>
+    <td><a href="Profile.php?DELbacket=' . $outserv[0] . '">Удалить</a></td>
     </tr>';
-    $userNames = $outserv[1];
 }
 
 
 $DELbacket = isset($_GET['DELbacket']) ? $_GET['DELbacket'] : 0;
 if($DELbacket > 0){
-    mysqli_query($dp, "DELETE FROM `корзина` WHERE Пользователь = '$userNames' AND `ID услуги` = '$DELbacket'");
+    $deleted_backet = mysqli_real_escape_string($dp, $DELbacket); // Экранирование для безопасности
+    mysqli_query($dp, "DELETE FROM `корзина` WHERE `ID корзины` = '$DELbacket'");
     header("location: Profile.php");
 }
 ?>
